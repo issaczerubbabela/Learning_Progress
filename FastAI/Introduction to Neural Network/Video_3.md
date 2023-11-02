@@ -2,7 +2,8 @@
 ## Introduction to Neural Network
 ---
 A standard neural network is just a function that tries to fit all data in a column.
-![[Pasted image 20231030170202.png]]
+![function](https://github.com/issaczerubbabela/Learning_Progress/blob/main/FastAI/Introduction%20to%20Neural%20Network/Attachments/Pasted%20image%2020231030170202.png/?raw=true)
+
 
 `partial` function can be used to ==fix== values of ==coefficients== in a function.
 
@@ -25,7 +26,7 @@ x = torch.linspace(-2, 2, steps=20)[:,None]
 y = add_noise(f(x), 0.15, 1.5)
 ```
 
-![[Pasted image 20231030171445.png]]
+![function](https://github.com/issaczerubbabela/Learning_Progress/blob/main/FastAI/Introduction%20to%20Neural%20Network/Attachments/Pasted%20image%2020231030171445.png/?raw=true)
 now we need to find a function that overlays all the data in the graph.
 
 ```python
@@ -45,7 +46,7 @@ Therefore, we use a numeric measure to obtain the best fit. we use *mean absolut
 def mae(preds, acts): return (torch.abs(preds-acts)).mean()
 ```
 
-![[Pasted image 20231030172136.png]]
+![function](https://github.com/issaczerubbabela/Learning_Progress/blob/main/FastAI/Introduction%20to%20Neural%20Network/Attachments/Pasted%20image%2020231030172136.png/?raw=true)
 
 now we have the measure of the mean absolute error which we can try to minimize manually to find the best fit. Voila! but this can prove to be tedious for large neural networks with millions of parameters. so we use ==calculus== to minimize the error. 
 we use derivatives to find the **gradient** of the **mean absolute error** which then we can use to increase or decrease the parameters to decrease the mean absolute error.
@@ -64,7 +65,9 @@ loss.backward() //to get PyTorch to calculate gradients.
 //the gradients are now stored in an attribute called grad
 abc.grad //displays the gradient
 ```
-![[Pasted image 20231030173626.png]]
+
+![function](https://github.com/issaczerubbabela/Learning_Progress/blob/main/FastAI/Introduction%20to%20Neural%20Network/Attachments/Pasted%20image%2020231030173626.png/?raw=true)
+
 	since the gradients are negative, we observe that our parameters are a little low. So we try to increase them a bit. 
 	this can be done by subtracting the gradient by a small multiplication of the gradient.
 ```python
@@ -106,16 +109,17 @@ def rectified_linear(m,b,x):
     y = m*x+b
     return torch.clip(y, 0.) //np.clip(x,0) is same as max(x,0)
 ```
-![[Pasted image 20231030180106.png]]
+
+![function](https://github.com/issaczerubbabela/Learning_Progress/blob/main/FastAI/Introduction%20to%20Neural%20Network/Attachments/Pasted%20image%2020231030180106.png/?raw=true)
 this is the *ReLU function*
 instead of `torch.clip(y, 0.)` , `F.relu(x)` can be used where `F` refers to the `torch.nn.functional` module.
-![[Pasted image 20231030180339.png]]
+![function](https://github.com/issaczerubbabela/Learning_Progress/blob/main/FastAI/Introduction%20to%20Neural%20Network/Attachments/Pasted%20image%2020231030180339.png/?raw=true)
 
 adding two layers of this function turns it into something like this.
-![[Pasted image 20231030180531.png]]
+![function](https://github.com/issaczerubbabela/Learning_Progress/blob/main/FastAI/Introduction%20to%20Neural%20Network/Attachments/Pasted%20image%2020231030180531.png/?raw=true)
 
 this way if enough of this ReLu functions are added up, you could approximate any function with a single input, to whatever accuracy you like. Adding more ReLu just makes it more accurate.
-![[Pasted image 20231030181310.png]]
+![function](https://github.com/issaczerubbabela/Learning_Progress/blob/main/FastAI/Introduction%20to%20Neural%20Network/Attachments/Pasted%20image%2020231030181310.png/?raw=true)
 
 all we need is enough data and time to train the amazing model.
 
